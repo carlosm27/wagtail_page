@@ -31,7 +31,11 @@
     </head>
     <div class="topnav">
         <a class="active" href="{{ '/blog' }}">Home Page</a>
-        <a href="{{ '/blog/blogcategorieindexpage' }}">Categorías</a>
+            {% for category in categories %}
+                <a>
+                    {{ category.name }}
+                </a>
+            {% endfor %}
 
       <form action="{% url 'search' %}" method="get">
           <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %} placeholder="Search...">
