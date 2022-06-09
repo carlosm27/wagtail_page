@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+
+
+    }
+    .container{
+
+        margin: auto;
+        width: 60%;
+        border: 5px;
+        padding: 10px;
+    }
+    }
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+        margin: auto;
+        width: 155%;
+        border: 5px;
+        padding: 10px
+    }
+
+
+</style>
+
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h3 class=" site-heading my-4 mt-3 text-white"> Bienvenidos a la Página de Noticias </h3>
+                    <p class="text-light">Waigtail es muy bueno! &nbsp
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+    <div class="intro">{{ page.intro|richtext }}</div>
+
+    <div class="container">
+        <div class="row">
+        <!-- Blog Entries Column -->
+            <div class="col-md-8 mt-3 left">
+                {% for post in blogpages %}
+                 <div class="card mb-4">
+                    <div class="card-body">
+
+                    {% with post=post.specific %}
+                        <h2 class="card-title">{{ post.title }}</h2>
+
+                        {% with post.main_image as main_image %}
+                            {% if main_image %}{% image main_image fill-320x240 %}{% endif %}
+                        {% endwith %}
+                        <p class="card-text text-muted h6">{{ post.date }}</p>
+                        <p class="card-text">{{ post.body|richtext }}</p>
+                        <a href="{% pageurl post %}" class="btn btn-black">Read More &rarr;</a>
+                    {% endwith %}
+                    </div>
+                 </div>
+                 {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

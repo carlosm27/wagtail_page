@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+
+{% block content %}
+
+<h1>Categorías</h1>
+    {% for category in categories %}
+        {{ category.name }}
+
+    {% endfor %}
+
+{% endblock %}
